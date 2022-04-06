@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import { toEditorSettings } from 'typescript';
 import './App.css';
+//import './components/Todos'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+type Task = {
+  name: string,
+  id: number,
+  isDone: boolean
 }
 
-export default App;
+function App() {
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [newTaskName, setNewTaskName] = useState<string>();
+
+  return (
+    <div className="App">
+      <input onChange={(event) => setNewTaskName(event.target.value)} />
+      <button onClick={() => setTasks(previousTodos => {
+        return [...previousTodos, { name: newTaskName ?? "", id: 1, isDone: false }]
+      })}>Add</button>
+      <div className="tasks">
+      {tasks.map(item => {
+            return <p>{item.name}</p>
+           })
+        }
+      </div>
+    </div>
+      );
+}
+
+      export default App;

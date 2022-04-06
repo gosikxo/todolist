@@ -1,0 +1,10 @@
+import React from 'react'
+
+export default function Todos(props: {name: String, id: Number, isDone: boolean}) {
+  return (
+    <div>
+        
+    </div>
+  )
+}
+
