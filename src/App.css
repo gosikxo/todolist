@@ -1,1 +1,68 @@
+body {
+    background-color: #F6F9F9;
+    text-align: center;
+}
 
+.App {
+    background-color: #DFCACE;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    width: 80%;
+    border: solid #A099AE;
+    padding: 20px; 
+    font-family: 'Patrick Hand', cursive;
+    font-size: 24px;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+.App h1 {
+    color: #A099AE;
+    font-family: 'Josefin Slab', serif;
+    font-size: 40px;
+    text-shadow: 2px 1px #B5838D ;
+}
+
+.App input, .App button {
+    font-family: 'Josefin Slab', serif;
+    font-size: 24px;
+    background-color: #B5838D;
+    border: none;
+    margin: 2px;
+}
+
+.App input {
+    background-color: #B5838D;
+}
+.App button {
+    background-color: #A099AE;
+}
+
+.App input:hover {
+    background-color: #A099AE;
+    font-size: 26px;
+}
+
+.App button:hover {
+    background-color: #B5838D;
+    cursor: pointer;
+    font-size: 26px;
+}
+
+.App button:active {
+    background-color: #A7AD99;
+    transform: rotate(360deg);
+    border-radius: 50%;
+    transition: 1s;
+    font-size: 28px;
+}
+
+
+.App button:active span::after {
+    content: 'ed';
+}
+
+
+
+/* kolor checkboxów: A7AD99 lub 99A0AD lub AD99AD*/
