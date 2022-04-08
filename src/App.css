@@ -89,12 +89,20 @@ body {
     border-right: solid #A099AE;
 }
 
+.tasks > * {
+    margin-bottom: 10px; 
+}
+
 .doneTasks {
     width: 50%;
 }
 
 .doneTasks:hover {
     border-left: solid #A7AD99;
+}
+
+.doneTasks > * {
+    margin-bottom: 10px; 
 }
 
 h3 {
