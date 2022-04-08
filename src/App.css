@@ -12,20 +12,20 @@ body {
     width: 80%;
     border: solid #A099AE;
     padding: 20px; 
-    font-family: 'Patrick Hand', cursive;
+    font-family: 'Josefin Slab', serif;
     font-size: 24px;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 
 .App h1 {
     color: #A099AE;
-    font-family: 'Josefin Slab', serif;
+    font-family:'Patrick Hand', cursive;
     font-size: 40px;
     text-shadow: 2px 1px #B5838D ;
 }
 
 .App input, .App button {
-    font-family: 'Josefin Slab', serif;
+    font-family: 'Patrick Hand', cursive;
     font-size: 24px;
     background-color: #B5838D;
     border: none;
@@ -33,14 +33,14 @@ body {
 }
 
 .App input {
-    background-color: #B5838D;
+    background-color: #A099AE;
 }
 .App button {
     background-color: #A099AE;
 }
 
 .App input:hover {
-    background-color: #A099AE;
+    background-color: #B5838D;
     font-size: 26px;
 }
 
@@ -61,6 +61,49 @@ body {
 
 .App button:active span::after {
     content: 'ed';
+}
+
+@keyframes strike {
+    from { text-decoration-color: transparent; }
+    to { text-decoration-color: auto; }
+  }
+
+.clicked {
+    text-decoration: line-through;
+    animation: strike 1s linear;
+}
+
+
+.tasksAndDoneTasks {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.tasks {
+    width: 50%;
+}
+
+.tasks:hover {
+    border-right: solid #A099AE;
+}
+
+.doneTasks {
+    width: 50%;
+}
+
+.doneTasks:hover {
+    border-left: solid #A7AD99;
+}
+
+h3 {
+    color:#AD99AD;
+    font-family:'Patrick Hand', cursive;
+}
+
+.doneTasks h3 {
+    color: #A7AD99;
 }
 
 

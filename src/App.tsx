@@ -29,19 +29,28 @@ function App() {
           return [...previousTodos, { name: newTaskName ?? "", id: Date.now(), isDone: false }]
         })
       }} ><span>Add</span></button>
-      <div className="tasks">
-        {tasks.map(task => <Todo onCheck={() => {
-          setTasks(previousTodos => previousTodos.map(todo => {
-            if (task.id === todo.id){
-              return {
-                ...todo,
-                isDone: !todo.isDone,
+      <div className='tasksAndDoneTasks'>
+        <div className="tasks">
+          <h3>To do:</h3>
+          {tasks.map(task => <Todo onCheck={() => {
+            setTasks(previousTodos => previousTodos.map(todo => {
+              if (task.id === todo.id){
+                return {
+                  ...todo,
+                  isDone: !todo.isDone,
+                }
               }
-            }
-            return todo;
-          }))
-        }} id={task.id} isDone={task.isDone} name={task.name} />)}
+              return todo;
+            }))
+          }} id={task.id} isDone={task.isDone} name={task.name} />)}
 
+        </div>
+        <div className="doneTasks">
+          <h3>Done:</h3>
+          {tasks.filter(task => task.isDone).map(todo => {
+            return <span>{todo.name}<br></br></span>         
+          })}
+        </div>
       </div>
     </div>
   );
