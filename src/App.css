@@ -1,27 +1,35 @@
 body {
-    background-color: white;
     text-align: center;
+    background-color: #c4d3d4;
+
 }
 
 .App {
-    background-color: white;
     display: block;
     margin-left: auto;
     margin-right: auto;
     margin-top: 50px;
     width: 80%;
-    border: solid #717C7D;
     padding: 20px;
-    font-family: 'Lato', sans-serif;
+    font-family: 'Cardo', serif;
     font-size: 24px;
-    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    background-color: #c4d3d4;
+
+}
+
+.header {
+    border: solid #c4d3d4;
     color: #587f83;
-    border-radius: 4px;
+    border-radius: 8px;
+    padding-bottom: 30px;
+    width: 100%;
+    background-color: white;
 }
 
 .App h1 {
     font-size: 40px;
-    color: #587f83
+    color: #587f83;
+    font-family: 'Josefin Sans', sans-serif;
 }
 
 .App input,
@@ -30,8 +38,8 @@ body {
     background-color: #f1f2f4;
     border: none;
     margin: 1px;
-    border-radius: 4px;
-
+    border-radius: 6px;
+    padding: 5px 17px;
 }
 
 .App input:hover {
@@ -47,24 +55,42 @@ body {
     content: 'ed';
 }
 
+
 .clicked {
     text-decoration: line-through;
     animation: strike 1s linear;
 }
 
-
 .tasksAndDoneTasks {
     width: 100%;
-    display: flex;
-    justify-content: center;
     margin-top: 20px;
+    border: solid #c4d3d4;
+    border-radius: 8px;
+    padding-bottom: 30px;
+    background-color: white;
 }
 
 .tasks {
-    width: 50%;
+    width: 100%;
+    padding-top: 25px;
 }
 
+.tasks button {
+    margin-left: 20px;
+}
 
-.tasks>* {
+.clearTask {
+    display: flex;
+    justify-content: center;
+}
+
+.tasks div {
     margin-bottom: 20px;
+    display: flex;
+    justify-content: left;
+    padding-left: 20px;
+}
+
+.tasks input {
+    margin-right: 5px;
 }

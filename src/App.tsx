@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import { Todo } from './components/Todo';
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Satisfy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cardo&family=Josefin+Sans:wght@500&display=swap');
 </style>
 
 
@@ -17,7 +17,7 @@ function App() {
   const [newTaskName, setNewTaskName] = useState<string>();
 
 
-  const deleteDoneTasks = ():void => {
+  const deleteDoneTasks = (): void => {
     setTasks(tasks.filter((task) => {
       return !task.isDone
     }))
@@ -25,20 +25,21 @@ function App() {
 
   return (
     <div className="App">
-      <h1>To Do List</h1>
-      <input value={newTaskName} onChange={(event) => setNewTaskName(event.target.value)} />
-      <button onClick={() => {
-        setNewTaskName("");
-        setTasks(previousTodos => {
-          return [...previousTodos, { name: newTaskName ?? "", id: Date.now(), isDone: false }]
-        })
-      }} ><span>Add</span></button>
+      <div className='header'>
+        <h1>To Do List</h1>
+        <input value={newTaskName} onChange={(event) => setNewTaskName(event.target.value)} />
+        <button onClick={() => {
+          setNewTaskName("");
+          setTasks(previousTodos => {
+            return [...previousTodos, { name: newTaskName ?? "", id: Date.now(), isDone: false }]
+          })
+        }} ><span>Add</span></button>
+      </div>
       <div className='tasksAndDoneTasks'>
         <div className="tasks">
-          <h3>To do:</h3>
           {tasks.map(task => <Todo onCheck={() => {
             setTasks(previousTodos => previousTodos.map(todo => {
-              if (task.id === todo.id){
+              if (task.id === todo.id) {
                 return {
                   ...todo,
                   isDone: !todo.isDone,
@@ -48,7 +49,7 @@ function App() {
             }))
           }} id={task.id} isDone={task.isDone} name={task.name} />)
           }
-         <button onClick={() => deleteDoneTasks()}>Clear tasks</button>
+          <button className='clearTask' onClick={() => deleteDoneTasks()}>Clear tasks</button>
         </div>
       </div>
     </div>
