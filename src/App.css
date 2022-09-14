@@ -1,72 +1,58 @@
 body {
-    background-color: #F6F9F9;
+    background-color: white;
     text-align: center;
 }
 
 .App {
-    background-color: #DFCACE;
+    background-color: white;
     display: block;
     margin-left: auto;
     margin-right: auto;
     margin-top: 50px;
     width: 80%;
-    border: solid #A099AE;
-    padding: 20px; 
-    font-family: 'Josefin Slab', serif;
+    border: solid #717C7D;
+    padding: 20px;
+    font-family: 'Lato', sans-serif;
     font-size: 24px;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    color: #717C7D;
 }
 
 .App h1 {
-    color: #A099AE;
-    font-family:'Patrick Hand', cursive;
     font-size: 40px;
-    text-shadow: 2px 1px #B5838D ;
+    color: #717C7D
 }
 
-.App input, .App button {
-    font-family: 'Patrick Hand', cursive;
+.App input,
+.App button {
     font-size: 24px;
-    background-color: #B5838D;
+    background-color: #f1f2f4;
     border: none;
     margin: 2px;
 }
 
-.App input {
-    background-color: #A099AE;
-}
-.App button {
-    background-color: #A099AE;
-}
-
 .App input:hover {
-    background-color: #B5838D;
     font-size: 26px;
 }
 
 .App button:hover {
-    background-color: #B5838D;
     cursor: pointer;
     font-size: 26px;
 }
-
-.App button:active {
-    background-color: #A7AD99;
-    transform: rotate(360deg);
-    border-radius: 50%;
-    transition: 1s;
-    font-size: 28px;
-}
-
 
 .App button:active span::after {
     content: 'ed';
 }
 
 @keyframes strike {
-    from { text-decoration-color: transparent; }
-    to { text-decoration-color: auto; }
-  }
+    from {
+        text-decoration-color: transparent;
+    }
+
+    to {
+        text-decoration-color: auto;
+    }
+}
 
 .clicked {
     text-decoration: line-through;
@@ -85,35 +71,16 @@ body {
     width: 50%;
 }
 
-.tasks:hover {
-    border-right: solid #A099AE;
-}
 
-.tasks > * {
-    margin-bottom: 10px; 
+.tasks>* {
+    margin-bottom: 10px;
 }
 
 .doneTasks {
     width: 50%;
-}
-
-.doneTasks:hover {
     border-left: solid #A7AD99;
 }
 
-.doneTasks > * {
-    margin-bottom: 10px; 
+.doneTasks>* {
+    margin-bottom: 10px;
 }
-
-h3 {
-    color:#AD99AD;
-    font-family:'Patrick Hand', cursive;
-}
-
-.doneTasks h3 {
-    color: #A7AD99;
-}
-
-
-
-/* kolor checkboxów: A7AD99 lub 99A0AD lub AD99AD*/

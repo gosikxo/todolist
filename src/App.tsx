@@ -1,12 +1,10 @@
-import { isDocument } from '@testing-library/user-event/dist/utils';
-import { stringify } from 'querystring';
 import React, { useState } from 'react';
-import { idText, toEditorSettings } from 'typescript';
 import './App.css';
 import { Todo } from './components/Todo';
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@600&family=Patrick+Hand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Satisfy&display=swap');
 </style>
+
 
 type Task = {
   name: string,
