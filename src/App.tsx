@@ -17,9 +17,15 @@ function App() {
   const [newTaskName, setNewTaskName] = useState<string>();
 
 
+  const deleteDoneTasks = ():void => {
+    setTasks(tasks.filter((task) => {
+      return !task.isDone
+    }))
+  }
+
   return (
     <div className="App">
-      <h1>To <span> Do </span> List</h1>
+      <h1>To Do List</h1>
       <input value={newTaskName} onChange={(event) => setNewTaskName(event.target.value)} />
       <button onClick={() => {
         setNewTaskName("");
@@ -40,14 +46,9 @@ function App() {
               }
               return todo;
             }))
-          }} id={task.id} isDone={task.isDone} name={task.name} />)}
-
-        </div>
-        <div className="doneTasks">
-          <h3>Done:</h3>
-          {tasks.filter(task => task.isDone).map(todo => {
-            return <span>{todo.name}<br></br></span>         
-          })}
+          }} id={task.id} isDone={task.isDone} name={task.name} />)
+          }
+         <button onClick={() => deleteDoneTasks()}>Clear tasks</button>
         </div>
       </div>
     </div>

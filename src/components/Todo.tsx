@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
 
-
 export const Todo = (props: {onCheck: () => void, name: string, id: number, isDone: boolean}) => {
   return (
     <div>

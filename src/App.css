@@ -15,12 +15,13 @@ body {
     font-family: 'Lato', sans-serif;
     font-size: 24px;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
-    color: #717C7D;
+    color: #587f83;
+    border-radius: 4px;
 }
 
 .App h1 {
     font-size: 40px;
-    color: #717C7D
+    color: #587f83
 }
 
 .App input,
@@ -28,7 +29,9 @@ body {
     font-size: 24px;
     background-color: #f1f2f4;
     border: none;
-    margin: 2px;
+    margin: 1px;
+    border-radius: 4px;
+
 }
 
 .App input:hover {
@@ -44,16 +47,6 @@ body {
     content: 'ed';
 }
 
-@keyframes strike {
-    from {
-        text-decoration-color: transparent;
-    }
-
-    to {
-        text-decoration-color: auto;
-    }
-}
-
 .clicked {
     text-decoration: line-through;
     animation: strike 1s linear;
@@ -64,7 +57,7 @@ body {
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-top: 40px;
+    margin-top: 20px;
 }
 
 .tasks {
@@ -73,14 +66,5 @@ body {
 
 
 .tasks>* {
-    margin-bottom: 10px;
-}
-
-.doneTasks {
-    width: 50%;
-    border-left: solid #A7AD99;
-}
-
-.doneTasks>* {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
