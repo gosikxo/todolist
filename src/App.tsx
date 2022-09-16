@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import { Todo } from './components/Todo';
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cardo&family=Josefin+Sans:wght@500&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Cardo&family=Josefin+Sans:wght@500&display=swap');
 </style>
 
 
@@ -23,17 +23,25 @@ function App() {
     }))
   }
 
+  const handleClick = (): void => {
+    if (!newTaskName) {
+      return
+    }
+    setTasks(previousTodos => {
+      return [...previousTodos, { name: newTaskName ?? "", id: Date.now(), isDone: false }]
+    })
+    setNewTaskName("");
+  }
+
   return (
     <div className="App">
       <div className='header'>
         <h1>To Do List</h1>
-        <input value={newTaskName} onChange={(event) => setNewTaskName(event.target.value)} />
-        <button onClick={() => {
-          setNewTaskName("");
-          setTasks(previousTodos => {
-            return [...previousTodos, { name: newTaskName ?? "", id: Date.now(), isDone: false }]
-          })
-        }} ><span>Add</span></button>
+        <input value={newTaskName} onChange={(event) => {
+          setNewTaskName(event.target.value)
+        }} />
+        <button onClick={() => handleClick()
+        } ><span>Add</span></button>
       </div>
       <div className='tasksAndDoneTasks'>
         <div className="tasks">
