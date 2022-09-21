@@ -23,6 +23,7 @@ function App() {
     }))
   }
 
+
   const handleClick = (): void => {
     if (!newTaskName) {
       return
@@ -31,6 +32,13 @@ function App() {
       return [...previousTodos, { name: newTaskName ?? "", id: Date.now(), isDone: false }]
     })
     setNewTaskName("");
+  }
+
+  const handleDeleteClick = (id:number): void => {
+    const removeItem = tasks.filter((task) => {
+      return task.id !== id;
+    });
+    setTasks(removeItem);
   }
 
   return (
@@ -55,7 +63,10 @@ function App() {
               }
               return todo;
             }))
-          }} id={task.id} isDone={task.isDone} name={task.name} />)
+          }} onClick={() => {
+            handleDeleteClick(task.id)
+          }} 
+           id={task.id} isDone={task.isDone} name={task.name} />)
           }
           <button className='clearTask' onClick={() => deleteDoneTasks()}>Clear tasks</button>
         </div>
