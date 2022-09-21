@@ -25,11 +25,11 @@ body {
     margin-bottom: 20px;
 }
 
-.relaxIcon {
+.relaxIcon, .todoIcon {
     width: 40px;
 }
 
-.relaxIcon:hover {
+.relaxIcon:hover, .todoIcon:hover {
     cursor: pointer;
 }
 
