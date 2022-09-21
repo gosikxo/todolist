@@ -1,7 +1,9 @@
 body {
     text-align: center;
     background-color: #c4d3d4;
-
+    margin: 0;
+    padding: 0;
+    margin-top: -50px;
 }
 
 .App {
@@ -15,6 +17,20 @@ body {
     font-size: 24px;
     background-color: #c4d3d4;
 
+}
+
+.icons {
+    display: flex;
+    justify-content: end;
+    margin-bottom: 20px;
+}
+
+.relaxIcon {
+    width: 40px;
+}
+
+.relaxIcon:hover {
+    cursor: pointer;
 }
 
 .header {

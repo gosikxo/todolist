@@ -43,6 +43,9 @@ function App() {
 
   return (
     <div className="App">
+      <div className='icons'>
+        <img className='relaxIcon' src='https://cdn-icons-png.flaticon.com/512/3202/3202829.png'/>
+      </div>
       <div className='header'>
         <h1>To Do List</h1>
         <input value={newTaskName} onChange={(event) => {
