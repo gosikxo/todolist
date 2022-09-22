@@ -25,11 +25,12 @@ body {
     margin-bottom: 20px;
 }
 
-.relaxIcon, .todoIcon {
+.relaxIcon, .todoIcon, .doneTasksIcon {
     width: 40px;
+    margin-right: 20px;
 }
 
-.relaxIcon:hover, .todoIcon:hover {
+.relaxIcon:hover, .todoIcon:hover, .doneTasksIcon:hover {
     cursor: pointer;
 }
 

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import { Todo } from './components/Todo';
 import RelaxPage from './components/RelaxPage';
+import DoneTasksPage from './components/DoneTasksPage';
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Cardo&family=Josefin+Sans:wght@500&display=swap');
 </style>
@@ -49,7 +50,13 @@ function App() {
           <img onClick={() => {
             setPage('second-page')
           }}
-            className='relaxIcon' src='https://cdn-icons-png.flaticon.com/512/3202/3202829.png' />
+            className='relaxIcon'
+            src='https://cdn-icons-png.flaticon.com/512/3202/3202829.png' />
+          <img onClick={() => {
+            setPage('third-page')
+          }}
+            className='doneTasksIcon'
+            src='https://cdn-icons-png.flaticon.com/512/4091/4091120.png' />
         </div>
         <div className='header'>
           <h1>To Do List</h1>
@@ -85,12 +92,25 @@ function App() {
     return (
       <div className="App">
         <RelaxPage onClick={() => {
-          console.log('clicked')
           setPage('first-page')
-        }}/>
+        }}
+        onClick2={() => {
+          setPage('third-page')
+        }} />
       </div>
     )
-  } return <div></div>
+  } else {
+    return (
+      <div className="App">
+        <DoneTasksPage onClick={() => {
+          setPage('first-page')
+        }}
+        onClick2={() => {
+          setPage('second-page')
+        }} />
+      </div>
+    )
+  }
 }
 
 export default App;
