@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import { Todo } from './components/Todo';
 import RelaxPage from './components/RelaxPage';
@@ -14,10 +14,41 @@ type Task = {
   isDone: boolean
 }
 
+async function postTask(task: Task) {
+  const response = await fetch('https://todo.bitsky.workers.dev/tasks', {
+    method: 'POST',
+    body: JSON.stringify(task)
+  })
+}
+
+async function getTasks() {
+  const res = await fetch('https://todo.bitsky.workers.dev/tasks');
+  const data = await res.json();
+  return data;
+}
+
+async function updateTask(task: Task) {
+  const response = await fetch(`https://todo.bitsky.workers.dev/tasks/${task.id}`, {
+    method: 'POST',
+    body: JSON.stringify(task)
+  })
+}
+
+async function deleteTask(task: Task) {
+  const response = await fetch(`https://todo.bitsky.workers.dev/tasks/${task.id}/delete`, {
+    method: 'POST',
+    body: JSON.stringify(task)
+  })
+}
+
 function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [newTaskName, setNewTaskName] = useState<string>();
   const [page, setPage] = useState("first-page")
+
+  // useEffect(() => {
+  //   getTasks().then(data => setTasks(data))
+  // }, [])
 
 
   const deleteDoneTasks = (): void => {
@@ -26,14 +57,15 @@ function App() {
     }))
   }
 
-
   const handleClick = (): void => {
+    const newTaskData = { name: newTaskName ?? "", id: Date.now(), isDone: false }
     if (!newTaskName) {
       return
     }
     setTasks(previousTodos => {
-      return [...previousTodos, { name: newTaskName ?? "", id: Date.now(), isDone: false }]
+      return [...previousTodos, newTaskData]
     })
+    postTask(newTaskData)
     setNewTaskName("");
   }
 
@@ -75,6 +107,7 @@ function App() {
                     ...todo,
                     isDone: !todo.isDone,
                   }
+                  updateTask(task)
                 }
                 return todo;
               }))
@@ -94,9 +127,9 @@ function App() {
         <RelaxPage onClick={() => {
           setPage('first-page')
         }}
-        onClick2={() => {
-          setPage('third-page')
-        }} />
+          onClick2={() => {
+            setPage('third-page')
+          }} />
       </div>
     )
   } else {
@@ -105,9 +138,9 @@ function App() {
         <DoneTasksPage onClick={() => {
           setPage('first-page')
         }}
-        onClick2={() => {
-          setPage('second-page')
-        }} />
+          onClick2={() => {
+            setPage('second-page')
+          }} />
       </div>
     )
   }
