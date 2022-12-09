@@ -5,6 +5,7 @@ import RelaxPage from './components/RelaxPage';
 import DoneTasksPage from './components/DoneTasksPage';
 import { supabase } from './supabase';
 import { v4 as uuid } from "uuid";
+import { User } from '@supabase/supabase-js';
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Cardo&family=Josefin+Sans:wght@500&display=swap');
@@ -14,8 +15,9 @@ import { v4 as uuid } from "uuid";
 type Task = {
   name: string,
   id: string,
-  isDone: boolean,
-  isDeleted: boolean
+  is_done: boolean,
+  is_deleted: boolean
+  user_id: string;
 }
 
 async function postTask(task: Task) {
@@ -33,7 +35,7 @@ async function updateTask(task: Task) {
   return await supabase.from('todos').update(task).eq('id', task.id);
 }
 
-function App() {
+function App({user}: {user: User}) {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [newTaskName, setNewTaskName] = useState<string>();
   const [page, setPage] = useState("first-page")
@@ -45,7 +47,7 @@ function App() {
         return
       }
       setTasks(result.data.filter((task) => {
-        return !task.isDeleted
+        return !task.is_deleted
       }))
     }
     )
@@ -54,15 +56,15 @@ function App() {
 
   const deleteDoneTasks = (): void => {
     setTasks(tasks.filter((task) => {
-      if (task.isDone) {
-        updateTask({ ...task, isDeleted: true });
+      if (task.is_done) {
+        updateTask({ ...task, is_deleted: true });
       }
-      return !task.isDone
+      return !task.is_done
     }))
   }
 
   const handleClick = (): void => {
-    const newTaskData = { name: newTaskName ?? "", id: uuid(), isDone: false, isDeleted: false }
+    const newTaskData = { name: newTaskName ?? "", id: uuid(), is_done: false, is_deleted: false, user_id: user.id }
     if (!newTaskName) {
       return
     }
@@ -78,7 +80,7 @@ function App() {
     if (!foundTask) {
       throw new Error('Task not found')
     }
-    updateTask({ ...foundTask, isDeleted: true });
+    updateTask({ ...foundTask, is_deleted: true });
     const removeItem = tasks.filter((task) => {
       return task.id !== id;
     });
@@ -115,7 +117,7 @@ function App() {
                 if (task.id === todo.id) {
                   const newTask = {
                     ...todo,
-                    isDone: !todo.isDone,
+                    is_done: !todo.is_done,
                   };
                   updateTask(newTask)
                   return newTask
@@ -125,7 +127,7 @@ function App() {
             }} onClick={() => {
               handleDeleteClick(task.id)
             }}
-              id={task.id} isDone={task.isDone} name={task.name} />)
+              id={task.id} isDone={task.is_done} name={task.name} />)
             }
             <button className='clearTask' onClick={() => deleteDoneTasks()}>Clear tasks</button>
           </div>
