@@ -3,6 +3,9 @@ import './App.css';
 import { Todo } from './components/Todo';
 import RelaxPage from './components/RelaxPage';
 import DoneTasksPage from './components/DoneTasksPage';
+import { supabase } from './supabase';
+import { v4 as uuid } from "uuid";
+
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Cardo&family=Josefin+Sans:wght@500&display=swap');
 </style>
@@ -10,35 +13,24 @@ import DoneTasksPage from './components/DoneTasksPage';
 
 type Task = {
   name: string,
-  id: number,
-  isDone: boolean
+  id: string,
+  isDone: boolean,
+  isDeleted: boolean
 }
 
 async function postTask(task: Task) {
-  const response = await fetch('https://todo.bitsky.workers.dev/tasks', {
-    method: 'POST',
-    body: JSON.stringify(task)
-  })
+  const res = await supabase.from('todos').insert(
+    task
+  );
+  return res;
 }
 
 async function getTasks() {
-  const res = await fetch('https://todo.bitsky.workers.dev/tasks');
-  const data = await res.json();
-  return data;
+  return await supabase.from('todos').select();
 }
 
 async function updateTask(task: Task) {
-  const response = await fetch(`https://todo.bitsky.workers.dev/tasks/${task.id}`, {
-    method: 'POST',
-    body: JSON.stringify(task)
-  })
-}
-
-async function deleteTask(task: Task) {
-  const response = await fetch(`https://todo.bitsky.workers.dev/tasks/${task.id}/delete`, {
-    method: 'POST',
-    body: JSON.stringify(task)
-  })
+  return await supabase.from('todos').update(task).eq('id', task.id);
 }
 
 function App() {
@@ -46,19 +38,31 @@ function App() {
   const [newTaskName, setNewTaskName] = useState<string>();
   const [page, setPage] = useState("first-page")
 
-  // useEffect(() => {
-  //   getTasks().then(data => setTasks(data))
-  // }, [])
+  useEffect(() => {
+    getTasks().then(result => {
+      if (!result.data || result.error) {
+        // TODO: add message to user
+        return
+      }
+      setTasks(result.data.filter((task) => {
+        return !task.isDeleted
+      }))
+    }
+    )
+  }, [])
 
 
   const deleteDoneTasks = (): void => {
     setTasks(tasks.filter((task) => {
+      if (task.isDone) {
+        updateTask({ ...task, isDeleted: true });
+      }
       return !task.isDone
     }))
   }
 
   const handleClick = (): void => {
-    const newTaskData = { name: newTaskName ?? "", id: Date.now(), isDone: false }
+    const newTaskData = { name: newTaskName ?? "", id: uuid(), isDone: false, isDeleted: false }
     if (!newTaskName) {
       return
     }
@@ -66,15 +70,21 @@ function App() {
       return [...previousTodos, newTaskData]
     })
     postTask(newTaskData)
-    setNewTaskName("");
+    setNewTaskName("")
   }
 
-  const handleDeleteClick = (id: number): void => {
+  const handleDeleteClick = (id: string): void => {
+    const foundTask = tasks.find(task => task.id === id)
+    if (!foundTask) {
+      throw new Error('Task not found')
+    }
+    updateTask({ ...foundTask, isDeleted: true });
     const removeItem = tasks.filter((task) => {
       return task.id !== id;
     });
     setTasks(removeItem);
   }
+
   if (page === "first-page") {
     return (
       <div className="App">
@@ -103,11 +113,12 @@ function App() {
             {tasks.map(task => <Todo onCheck={() => {
               setTasks(previousTodos => previousTodos.map(todo => {
                 if (task.id === todo.id) {
-                  return {
+                  const newTask = {
                     ...todo,
                     isDone: !todo.isDone,
-                  }
-                  updateTask(task)
+                  };
+                  updateTask(newTask)
+                  return newTask
                 }
                 return todo;
               }))

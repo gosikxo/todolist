@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 
 
-export const Todo = (props: {onCheck: () => void, onClick: () => void, name: string, id: number, isDone: boolean}) => {
+export const Todo = (props: {onCheck: () => void, onClick: () => void, name: string, id: string, isDone: boolean}) => {
   return (
     <div>
       <input onChange={props.onCheck} checked={props.isDone} type="checkbox"></input>
